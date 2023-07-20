@@ -1,0 +1,81 @@
+
+
+
+D:\xampp\htdocs\saas-telerad\resources\views\studies\daily-workflow.blade.php
+
+<script>
+	$.extend(study.config, {
+		faxesinUrl: "{{ route('studies.getFaxesin', ['study' => '']) }}",
+		notesUrl: "{{ route('studies.getNotes', ['study' => '','autoview'=>'false']) }}",
+		addNoteUrl:"{{ route('studies.add-note', ['study' => '']) }}",
+		auditUrl:"{{ route('studies.audit', ['study' => '']) }}",
+		templateUrl: "{{ route('reportTemplates.show', ['reportTemplate' => '']) }}",
+		fetchUrl: "{{ route('studies.get-filtered') }}",
+		updateUrl: "/studies/",
+		modalitiesUrl: "{{ route('modalities.get-all') }}",
+		transcribersUrl: "{{ route('users.get-all', ['type' => \App\Role::ROLE_TRANSCRIBER]) }}",
+		getStudyUrl: "{{ route('studies.show', ['study' => '']) }}",
+		studyPreviewUrl: "{{ route('studies.preview', ['study' => '']) }}",
+		dailyWorkflowUrl: "{{ route('studies.daily-workflow') }}"
+	});
+
+    let studiesFilters = localStorage.getItem('studiesFilters');
+    
+    
+	$.extend(user, {
+		logged_user_id: $('.navbar-brand').data('logged-user-id')
+	});
+	$.extend(user.config, {
+		updateUrl: "{{ route('users.update', ['user' => ''])  }}"
+	});
+	var verification_sheet = "{{ route('studies.verification-sheet','') }}";
+	$.extend(dailyWorkflow.urls, {
+		upload_dictation: "{{ route('studies.upload-dictation', ['study' => '']) }}"
+	});
+$(document).ready(function(){
+    localStorage.setItem('dicom', 'cloud');
+	//window.dailyWorkflow.addFilter('dos', null);
+	$('.select2').select2({allowClear:true});
+	$('#dos').datepicker({
+		 orientation: 'bottom',
+		  format: 'mm-dd-yyyy',
+	}).on('changeDate', function(e) { 
+		var dos = $(this).val(); 
+		if(dos){
+		window.dailyWorkflow.addFilter('dos', dos);
+		}else{
+			window.dailyWorkflow.addFilter('dos', null);
+		}
+		$(this).datepicker('hide');
+	}).on('blur', function() {
+		// var dos = $(this).val(); 
+		// if(dos){
+		// window.dailyWorkflow.addFilter('dos', dos);
+		// }else{
+		// 	window.dailyWorkflow.addFilter('dos', null);
+		// }
+	});
+	$('#dor').datepicker({
+		 orientation: 'bottom',
+		  format: 'mm-dd-yyyy',
+	}).on('changeDate', function(e) { 
+		var dor = $(this).val(); 
+		//window.dailyWorkflow.addFilter('dos', dos);
+		$(this).datepicker('hide');
+	});
+
+	/* var tableOffset = $(".dwResCard").offset().top;
+    var filter = $(".dwResCard").offset().top;
+    $(window).bind("scroll", function() {
+        var offset = $(this).scrollTop();
+        if (offset >= filter) {
+            $(".dwResCard").addClass('sticky-filters');
+        }
+        else if ( offset < filter ) {
+            $(".dwResCard").removeClass('sticky-filters');
+        }
+    }); */
+
+});
+let transcribers = @json($transcribers);
+</script>
