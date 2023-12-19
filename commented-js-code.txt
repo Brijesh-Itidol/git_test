@@ -1,8 +1,4 @@
-
-
-
-D:\xampp\htdocs\saas-telerad\resources\views\studies\daily-workflow.blade.php
-
+Suggession code
 <script>
 	$.extend(study.config, {
 		faxesinUrl: "{{ route('studies.getFaxesin', ['study' => '']) }}",
