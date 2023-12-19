@@ -48,12 +48,12 @@ $(document).ready(function(){
 		}
 		$(this).datepicker('hide');
 	}).on('blur', function() {
-		// var dos = $(this).val(); 
-		// if(dos){
-		// window.dailyWorkflow.addFilter('dos', dos);
-		// }else{
-		// 	window.dailyWorkflow.addFilter('dos', null);
-		// }
+		 var dos = $(this).val(); 
+		 if(dos){
+		 window.dailyWorkflow.addFilter('dos', dos);
+		 }else{
+		 	window.dailyWorkflow.addFilter('dos', null);
+		 }
 	});
 	$('#dor').datepicker({
 		 orientation: 'bottom',
